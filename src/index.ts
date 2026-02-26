@@ -10,6 +10,7 @@ export type {
   BaseProvider,
   GenerateResponseOptions,
 } from "./types/index.js";
+export { TypeCastError } from "./types/index.js";
 export type {
   OpenAIProviderOptions,
   AnthropicProviderOptions,

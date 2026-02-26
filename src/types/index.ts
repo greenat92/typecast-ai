@@ -1,3 +1,18 @@
+/**
+ * Thrown when parsing/validation fails after all retries (maxRetries exhausted).
+ * The cause is the last ZodError or SyntaxError.
+ */
+export class TypeCastError extends Error {
+  constructor(
+    message: string,
+    public readonly cause: unknown
+  ) {
+    super(message);
+    this.name = "TypeCastError";
+    Object.setPrototypeOf(this, TypeCastError.prototype);
+  }
+}
+
 /** Optional context passed to generateResponse (e.g. for schema-constrained providers like OpenAI). */
 export interface GenerateResponseOptions {
   /** JSON Schema for the expected response shape. Providers may use this for response_format. */

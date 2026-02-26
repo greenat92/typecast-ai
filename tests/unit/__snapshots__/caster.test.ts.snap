@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Self-Healing – Scenario B (Standard Healing) > provider returns invalid JSON (wrong types), then valid JSON; 2 API calls; second prompt includes Zod error 1`] = `
+[
+  "Return a user.",
+  "Return a user.
+
+---
+Your previous response:
+{"name": 123, "age": 30}
+
+---
+Error: Zod validation failed:
+[
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "number",
+    "path": [
+      "name"
+    ],
+    "message": "Expected string, received number"
+  }
+]
+
+Fix the JSON according to the schema and return only the corrected JSON.",
+]
+`;

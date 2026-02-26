@@ -1,6 +1,7 @@
 import { type ZodSchema, ZodError } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import type { BaseProvider } from "../types/index.js";
+import { TypeCastError } from "../types/index.js";
 import { repairJson } from "../utils/repair.js";
 
 /** Options for .cast() */
@@ -60,7 +61,10 @@ export class TypeCast {
           conversation = `${conversation}\n\n---\nYour previous response:\n${raw}\n\n---\nError: ${formatParseError(e)}\n\nFix the JSON according to the schema and return only the corrected JSON.`;
           continue;
         }
-        throw e;
+        throw new TypeCastError(
+          `JSON parse failed after ${maxRetries + 1} attempt(s): ${e instanceof Error ? e.message : String(e)}`,
+          e
+        );
       }
 
       try {
@@ -70,7 +74,10 @@ export class TypeCast {
           conversation = `${conversation}\n\n---\nYour previous response:\n${raw}\n\n---\nError: ${formatParseError(e)}\n\nFix the JSON according to the schema and return only the corrected JSON.`;
           continue;
         }
-        throw e;
+        throw new TypeCastError(
+          `Schema validation failed after ${maxRetries + 1} attempt(s): ${e instanceof Error ? e.message : String(e)}`,
+          e
+        );
       }
     }
 
