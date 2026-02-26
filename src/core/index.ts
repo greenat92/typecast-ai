@@ -1,6 +1,7 @@
 import { type ZodSchema, ZodError } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import type { BaseProvider } from "../types/index.js";
+import { repairJson } from "../utils/repair.js";
 
 /** Options for .cast() */
 export interface CastOptions {
@@ -49,9 +50,11 @@ export class TypeCast {
         jsonSchema,
       });
 
+      const repaired = repairJson(raw);
+
       let parsed: unknown;
       try {
-        parsed = JSON.parse(raw);
+        parsed = JSON.parse(repaired);
       } catch (e) {
         if (attempt < maxRetries) {
           conversation = `${conversation}\n\n---\nYour previous response:\n${raw}\n\n---\nError: ${formatParseError(e)}\n\nFix the JSON according to the schema and return only the corrected JSON.`;
