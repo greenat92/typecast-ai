@@ -1,0 +1,40 @@
+{
+  "name": "typecast-ai",
+  "version": "0.1.0",
+  "description": "The smallest, most reliable way to get structured data out of any LLM. Contract-first with Zod.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "llm",
+    "structured-output",
+    "zod",
+    "openai",
+    "anthropic",
+    "ollama"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
