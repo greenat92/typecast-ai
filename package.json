@@ -17,6 +17,9 @@
   ],
   "scripts": {
     "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -29,7 +32,9 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.3.3"
+    "@vitest/coverage-v8": "^2.1.6",
+    "typescript": "^5.3.3",
+    "vitest": "^2.1.6"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",

@@ -39,6 +39,16 @@ const typecast = new TypeCast(provider);
 // .cast() works the same – providers are interchangeable
 ```
 
+## Testing
+
+```bash
+npm test              # run suite once
+npm run test:watch    # watch mode
+npm run test:coverage # coverage report (v8)
+```
+
+Tests use **Vitest** in strict mode: unit tests for local repair (`tests/repair.test.ts`) and mocked-provider tests for the self-healing loop (`tests/caster.test.ts`). Core and repair logic have high coverage; add integration tests with real API keys before major releases.
+
 ## Project structure
 
 - `src/core` – TypeCast class and core logic
