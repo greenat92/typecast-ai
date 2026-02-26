@@ -32,7 +32,10 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "zod": "^3.23.8"
+    "@anthropic-ai/sdk": "^0.32.1",
+    "openai": "^4.73.0",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.23.5"
   },
   "engines": {
     "node": ">=18"

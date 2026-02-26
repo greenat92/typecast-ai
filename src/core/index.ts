@@ -1,4 +1,5 @@
 import { type ZodSchema, ZodError } from "zod";
+import { zodToJsonSchema } from "zod-to-json-schema";
 import type { BaseProvider } from "../types/index.js";
 
 /** Options for .cast() */
@@ -41,8 +42,12 @@ export class TypeCast {
     const { maxRetries = 2 } = options;
     let conversation = prompt;
 
+    const jsonSchema = zodToJsonSchema(schema);
+
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
-      const raw = await this.provider.generateResponse(conversation);
+      const raw = await this.provider.generateResponse(conversation, {
+        jsonSchema,
+      });
 
       let parsed: unknown;
       try {

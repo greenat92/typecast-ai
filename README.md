@@ -17,23 +17,26 @@ npm install typecast-ai zod
 ## Quick Start
 
 ```ts
-import { TypeCast } from "typecast-ai";
-import type { BaseProvider } from "typecast-ai";
+import { TypeCast, OpenAIProvider } from "typecast-ai";
 import { z } from "zod";
 
-// 1. Implement or use a provider
-const myProvider: BaseProvider = {
-  async generateResponse(prompt: string) {
-    // Call your LLM (OpenAI, Anthropic, Ollama, etc.)
-    return '{"name": "World"}';
-  },
-};
+// Use the OpenAI provider (or AnthropicProvider – same interface)
+const provider = new OpenAIProvider({ model: "gpt-4o-mini" });
+const typecast = new TypeCast(provider);
 
-// 2. Create TypeCast and cast with a schema
-const typecast = new TypeCast(myProvider);
-const schema = z.object({ name: z.string() });
-const data = await typecast.cast(schema, "Return JSON with a name field.");
-// data is { name: string }
+const schema = z.object({ name: z.string(), age: z.number() });
+const data = await typecast.cast(schema, "Return a user: name Alice, age 30.");
+// data is { name: string; age: number }
+```
+
+### Using Anthropic (Claude)
+
+```ts
+import { TypeCast, AnthropicProvider } from "typecast-ai";
+
+const provider = new AnthropicProvider({ model: "claude-3-5-haiku-20241022" });
+const typecast = new TypeCast(provider);
+// .cast() works the same – providers are interchangeable
 ```
 
 ## Project structure
